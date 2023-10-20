@@ -172,7 +172,7 @@ disp(['Směrodatná odchylka: ', num2str(std2)]);
 disp(['Energie vysokých frekvencí: ', num2str(high_freq_energy2)]);
 
 
-%% Detekce nejostřejšího snímku ve videu (celkově)
+%% Detekce nejostřejšího snímku ve videu
 close all;
 videoObj = VideoReader("img/podzimni_kvetena_focus_test.mp4");
 nejostrejsi = 0;
@@ -183,62 +183,17 @@ while hasFrame(videoObj)
     subplot 121; imshow(frame);
 
     gray_frame = rgb2gray(frame);
+    edge_image1 = edge(gray_frame, 'canny');
 
-    a = edge(gray_frame, 'sobel');
-    b = edge(nejostrejsi, 'sobel');
-    
-    a = sum(a(:));
-    b = sum(b(:));
-
-    if(a>b)
+    if(edge(gray_frame, 'canny')>edge(nejostrejsi, 'canny'))
         nejostrejsi = gray_frame;
-        frame_nej = frame;
-        subplot 122; imshow(frame);
-        text(10, 10, ['Nejostřejší snímek je:  ' num2str(i)], 'FontSize', 12, 'FontWeight', 'bold', 'Color', 'r');
-
     end
 
+    subplot 122; imshow(nejostrejsi)
     pause(0.000000001);
+
     i = i + 1;
     
-end
-
-%% Detekce nejostřejšího snímku ve videu (část)
-close all;
-videoObj = VideoReader("img/podzimni_kvetena_focus_test.mp4");
-nejostrejsi_crop = 0;
-i = 0;
-
-while hasFrame(videoObj)
-    frame = readFrame(videoObj);
-    subplot 121; imshow(frame);
-
-    gray_frame = rgb2gray(frame);
-
-    % Definujte rozměry čtverce uprostřed
-    centerX = size(frame, 2) / 2;
-    centerY = size(frame, 1) / 2;
-    sideLength = 100; % Velikost strany čtverce (nastavte podle potřeby)
-
-    % Vyberte čtvercovou oblast středu
-    cropped_gray_frame = gray_frame(centerY - sideLength/2 : centerY + sideLength/2, centerX - sideLength/2 : centerX + sideLength/2);
-
-    a = edge(cropped_gray_frame, 'sobel');
-    b = edge(nejostrejsi_crop, 'sobel');
-
-    a = sum(a(:));
-    b = sum(b(:));
-
-    if (a > b)
-        nejostrejsi_crop = cropped_gray_frame;
-        nejostrejsi_celej = frame;
-        subplot 122;
-        imshow(frame);
-        text(10, 10, ['Nejostřejší snímek je:  ' num2str(i)], 'FontSize', 12, 'FontWeight', 'bold', 'Color', 'r');
-    end
-
-    pause(0.000000001);
-    i = i + 1;
 end
 
 
