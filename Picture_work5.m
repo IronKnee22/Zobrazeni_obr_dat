@@ -51,13 +51,12 @@ cell_cler = imclearborder(cell_fill);
 cell_imerode = imerode(cell_cler,se);
 
 cell_bwperim = bwperim(cell_imerode);
+stats = regionprops(cell_imerode, 'Area');
+velikost_objektu = stats(1).Area % Pokud máte pouze jeden objekt
 
-nejvzdalenejsi_x = max(cell_bwperim(:, 1)) - min(cell_bwperim(:, 1));
-nejvzdalenejsi_y = max(cell_bwperim(:, 2)) - min(cell_bwperim(:, 2));
 
 
-disp(['Šířka: ' num2str(nejvzdalenejsi_x)]);
-disp(['Délka: ' num2str(nejvzdalenejsi_y)]);
+
 
 
 
