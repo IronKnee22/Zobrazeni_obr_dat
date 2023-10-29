@@ -52,13 +52,8 @@ cell_imerode = imerode(cell_cler,se);
 
 cell_bwperim = bwperim(cell_imerode);
 stats = regionprops(cell_imerode, 'Area');
-velikost_objektu = stats(1).Area % Pokud máte pouze jeden objekt
-
-
-
-
-
-
+velikost_objektu = stats(1).Area; 
+disp(['Velikost objektu: ' num2str(velikost_objektu)])
 
 imshow(cell_bwperim)
 
