@@ -3,7 +3,8 @@
 
 %% Vyhlazení grafu
 close all;
-
+vektor = randi([1, 10], 1, 10);
+kernel = ones(1, 3) / 3;
 % Pomocí klouzavého průměru
 vysledek2 = zeros(1, length(vektor) - length(kernel) + 1);
 

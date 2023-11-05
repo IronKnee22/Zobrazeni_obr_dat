@@ -1,0 +1,22 @@
+cv1
+imresize() - změna rozlišení
+mean(image, 3) - pak v MATLABu provedete výpočet průměru přes třetí rozměr (dimenze) matice
+
+cv2 
+cat(3, gray_img, gray_img, gray_img) v MATLABu slouží k spojení tří matic (nebo vektorů) do jedné trojrozměrné matice.
+repmat() v MATLABu slouží k opakování (replikaci) matice nebo vektoru vícekrát v horizontálním a vertikálním směru.
+histeq() rozprostře histogram
+cumsum() - komulativní součet histogramu
+Adaptivní ekvalizace jsem schopen vybrat konktrétní místo poslední přáklad ginput(1)
+
+cv3
+klouzavý průměr
+conv() v MATLABu slouží k provádění konvoluce mezi dvěma vektory nebo mezi vektorem a jádrem (kernel).
+conv2 a imfilter dost podobné imfilter aplikuje filter
+imnoise() - vytvoří rušení na obrázku
+mask2 = image2 <= threshold; okud hodnota pixelu v image2 je menší nebo rovna hodnotě threshold, pak se výsledný pixel v binární masce (mask2) nastaví na 1 (nebo true), což označuje, že pixel splňuje podmínku.
+edge(image1, 'canny') v MATLABu slouží k detekci hran v obrázku image1 
+furierova transformace 
+fftshift v MATLABu se používá k posunu frekvenčního spektra, které bylo získáno pomocí diskrétní Fourierovy transformace (DFT). Tento posun se provádí tak, aby nulová frekvence (DC složka) byla umístěna uprostřed spektra.
+práce s videem
+
