@@ -8,6 +8,7 @@ Bimg = imbinarize(Gimg,"adaptive","ForegroundPolarity","dark","Sensitivity",0.5)
 Bimg = ~Bimg;
 Bimg = imclearborder(Bimg);
 fillimg = imfill(Bimg,"holes");
+imshow(fillimg)
 
 
 stats = regionprops(fillimg, 'Area');
