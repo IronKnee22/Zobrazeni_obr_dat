@@ -56,8 +56,9 @@ cell_bwperim = bwperim(cell_imerode);
 stats = regionprops(cell_imerode, 'Area');
 velikost_objektu = stats(1).Area; 
 disp(['Velikost objektu: ' num2str(velikost_objektu)])
+spojeno = imoverlay(cell,cell_bwperim);
 
-imshow(cell_bwperim)
+imshow(spojeno)
 
 %% Hledání silnice
 close all;
@@ -111,11 +112,3 @@ cara = colorauto .* uint8(largest_region);
 
 konecny = pozadi + cara;
 imshow(konecny)
-
-
-
-
-
-
-
-

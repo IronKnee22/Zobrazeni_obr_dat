@@ -15,7 +15,7 @@ subplot 133;montage(img3)
 
 
 subplot 131;mask = roipoly(img);
-kontury = activecontour(img, mask,200,"Chan-vese");
+kontury = activecontour(img, mask,500,"Chan-vese");
 kontury = imfill(kontury,"holes");
 a = img + kontury;
 subplot 131; imshow(a);
