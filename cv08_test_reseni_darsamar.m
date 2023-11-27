@@ -1,28 +1,30 @@
-close all;
-
-% Načtení všech snímků
-img = dicomread("cvt08_test_zadani_metadata.ImageComments.dcm");
-info = dicominfo("cvt08_test_zadani_metadata.ImageComments.dcm");
-
-% Získání souřadnic hledaného pixelu jako odstín šedé
-x = img(1, 1, 1); % Odstín prvního pixelu prvního snímku
-y = img(1, 2, 1); % Odstín druhého pixelu prvního snímku
-
-% Vytvoření pole pro ukládání průměrných odstínů
-average_shades = zeros(info.NumberOfFrames, 1);
-
-% Projděte všechny snímky a spočtěte průměrný odstín
-for frame = 1:info.NumberOfFrames
-    frame_data = dicomread("cvt08_test_zadani_metadata.ImageComments.dcm", 'Frames', frame);
-    average_shade = mean(frame_data(:));
-    average_shades(frame) = average_shade;
+imgs = dicomread('cvt08_test_zadani_metadata.ImageComments.dcm');
+%(1b)Ctete tento text 
+% (2b)Zobrazte histogram prvniho snimku 
+% (2b za dokonceni)Najdete zpravu, ktera se skryva v jednom pixelu kazdeho snimku. Souradnice hledaneho pixelu jsou pro vsechny snimky stejne. 
+% (2b)Souradnice hledaneho pixelu najdete jako odstin sedi v prvnim a druhem prvku img([1,2]) prvniho snimku.  
+% (3b)Pro spravne poradi pismen ve zprave musite seradit snimky dle prumerneho odstinu  Napoveda: Prevod z cisel do znaku: char([ 66   75   90   79   68]). Skryta zprava je srozumitelny text v cestine
+montage(imgs);
+img1 = imgs(:,:,:,1); 
+message_pixel = img1([1,2]);
+ 
+for ii=1:size(imgs,4)
+    img = imgs(:,:,:,ii);
+    avg_color(ii) = mean(img,'all');
+    messageVal(ii) = img(message_pixel(1),message_pixel(2));
 end
-
-% Třídění snímků podle průměrného odstínu
-[sorted_shades, sorted_indices] = sort(average_shades);
-
-% Dešifrování zprávy
-hidden_message = char(sorted_indices + 65); % Převod indexů na písmena
-
-% Zobrazení písmen vedle sebe
-disp(['Dešifrovaná zpráva: ', hidden_message']);
+img = imgs(:,:,:,5);
+[~,indexes] = sort(avg_color);
+stem(avg_color(indexes))
+message = char( messageVal(indexes) )
+%% konvoluce
+kernel =double( imgs(end-4:end, end-4:end,:,end));
+kernel = kernel/ sum(kernel,'all');
+img1_conv = imfilter(img(:,:,:,1),kernel);
+% imshow(img1_conv)
+%% zobrazeni
+close all
+subplot 221; imhist(imgs(:,:,:,1))
+subplot 222; imshow(img1_conv)
+subplot 212;
+text(0,0.5, sprintf('souradnice pixelu jsou: [%d %d]. Vysledek: %s',message_pixel(1),message_pixel(2),message));
