@@ -1,2 +1,2 @@
 # Zobrazeni_obr_dat
-ahoj
+[Otazky ke zkousce](Zkouska/README.md)
