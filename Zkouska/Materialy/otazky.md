@@ -287,39 +287,221 @@ Vyhlazovací filtry jsou techniky zpracování obrazu, které slouží k redukci
 **Původ hran v obraze** - hrany vznikají díky nespojitostem v normále k povrchu, hloubce, odrazivosti povrchu. odleskům nebo nespojitostech v osvětlení
 
 # 33. Kategorie hranových detektorů
+Hranové detektory jsou algoritmy používané v oblasti zpracování obrazu ke zvýraznění či identifikaci hran v obrazech.
 
 # 34. Detektory založené na hledání maxim prvních derivací
+Detektory hran založené na hledání maxim prvních derivací jsou často nazývány gradientními detektory. Tyto detektory se zaměřují na analýzu prvních derivací intenzity pixelů v obraze a identifikují místa, kde dochází k prudkým změnám intenzity, což indikuje přítomnost hran.
+
+**Sobelův operátor:** Používá konvoluci s jednoduchými maskami k aproximaci prvních derivací intenzity v horizontálním a vertikálním směru.
+Detekce: Lokalizuje hrany ve směrech, které jsou kolmé na sebe.
+
+**Robertsův operátor:** Využívá jednoduché konvoluční jádro k aproximaci prvních derivací intenzity v obou diagonálních směrech.
+Detekce: Zaměřuje se na diagonální hrany.
+
+![sobel roberts](../imgs/sobel_robert.PNG)
+
 
 # 35. Detektory založaené na hledání průcohodu druhých derivací nulou
+Detektory založené na hledání průchodu druhých derivací nulou jsou používány při analýze obrazových dat k identifikaci hran a změn intenzity. Princip spočívá ve vyhledávání míst na obrazu, kde dochází k prudké změně intenzity, což může naznačovat přítomnost hran nebo detailů.
 
 # 36. Ošetření Laplaciánem
+Ošetření Laplaciánem je proces, kde se na obrazu používá Laplaceův operátor pro zdůraznění změn v intenzitě a detekci hrany nebo struktur.
+
+**Předzpracování:**
+- Před aplikací Laplaceova operátoru se často provádí předzpracování obrazu, například pomocí filtrů pro redukci šumu nebo aplikace Gaussova filtru pro rozostření.
+
+**Aplikace Laplaceova operátoru:**
+- Laplaceův operátor se aplikuje na předzpracovaný obraz pomocí konvoluce. Konkrétní jádro pro Laplaceův operátor bylo uvedeno v předchozí odpovědi.
+
+**Zvýraznění změn:**
+- Výsledek konvoluce s Laplaceovým operátorem zvýrazní oblasti s prudkými změnami intenzity, což může být interpretováno jako hrany nebo detaily.
+
+**Práhování:**
+- Pro lepší vizualizaci a detekci hran se často aplikuje prahování. Prahování může oddělit oblasti s výraznými změnami od pozadí.
 
 # 37. LoG operátor
+Laplacián je velice citlivý na šum
+
+LoG operátor, což znamená Laplacian of Gaussian, je technika používaná v oblasti zpracování obrazu pro detekci hran a detailů. Tato technika kombinuje dva klíčové kroky: Gaussovský filtr a Laplaceův operátor.
+
+**Gaussovský filtr:**
+- Začneme aplikací Gaussova filtru na obraz. Gaussovský filtr slouží k rozmazání obrazu a redukci šumu.
+Gaussovský filtr má jádro, které se používá k vážené konvoluci s obrazem. Rozmazání obrazu pomáhá snížit vliv šumu a zjemnit přechody v intenzitě.
+
+**Laplaceův operátor:**
+- Poté se aplikuje Laplaceův operátor na obraz po předchozím rozmazání Gaussovským filtrem.
+Laplaceův operátor slouží k detekci prudkých změn v intenzitě, což může indikovat hrany nebo detaily na obrazu.
+
+**LoG operátor:**
+- Kombinujeme tyto dva kroky tím, že aplikujeme Laplaceův operátor na Gaussovsky vyhlazený obraz.
+Tím získáme obraz, ve kterém jsou hrany a detaily výrazněji zvýrazněny, a zároveň jsou potlačeny šumy.
 
 # 38. DoG jako aproximace Log
+DoG (Difference of Gaussians) a LoG (Laplacian of Gaussian) jsou dvě příbuzné techniky používané v oblasti zpracování obrazu pro detekci hran a detailů. DoG může být chápán jako aproximace LoG a je často používán kvůli výpočetní efektivitě.
+
+**DoG** je metoda, která spočívá v odčítání dvou Gaussovských rozmazání obrazu s různými hodnotami rozptylu (sigma). Tato operace vytváří obraz, ve kterém jsou výrazně zvýrazněny hrany a detaily.
 
 # 39. Odstranění nevýznamných hranových bodů
+Odstranění nevýznamných hranových bodů se často provádí s cílem zachovat pouze ty hrany, které jsou důležité nebo významné pro daný úkol.
+
+**Práhování:** 
+- Použití prahování je jednou z nejjednodušších metod. Tím, že nastavíme určitý prah intenzity, můžeme odstranit hrany s nižší intenzitou, které jsou pravděpodobně šum nebo nevýznamné. - poté je ještě vylepšené prahování kde je práh ze zdola i shora
+
+**Klastrování:**
+- Klastrování pixelů na základě jejich vlastností, jako je intenzita nebo barva, může odstranit nevýznamné hrany. 
 
 # 40. Fourierova transformace (DFT jednoduchých obrazců)
+Fourierova transformace mění …data… z 
+časové oblasti do frekvenční oblasti a zpět.  
+Tato transformace umožňuje analýzu frekvenčních složek obrazu nebo signálu.
 
 # 41. Filtrace ve frekvenční oblasti
+Filtrace ve frekvenční oblasti je technika zpracování obrazu, která pracuje s obrazem nebo signálem ve frekvenční doméně. Hlavním nástrojem pro filtrace ve frekvenční oblasti je Fourierova transformace, která umožňuje převod obrazu ze současné prostorové domény na frekvenční doménu a zpět.
+
+**Převod do frekvenční oblasti:**
+- Používá se Fourierova transformace (nejčastěji diskrétní Fourierova transformace - DFT) k převodu obrazu nebo signálu z prostorové do frekvenční domény. Tímto krokem získáme reprezentaci obrazu v termínech frekvencí.
+
+**Filtrace v frekvenční oblasti:**
+- V frekvenční doméně můžeme aplikovat filtry nebo manipulovat s frekvenčními složkami obrazu.
+Nízkoprůchodový filtr ponechá nízké frekvence a potlačí vysoké frekvence, zatímco vysokoprůchodový filtr funguje opačně. Obraz po aplikaci nízkoprůchodového filtru bude obsahovat hlavně nízkofrekvenční složky.
+Obecněji se mohou používat i jiné filtry nebo metody pro úpravu frekvenční reprezentace obrazu podle konkrétních požadavků.
+
+**Inverzní transformace:**
+- Po provedení požadovaných operací ve frekvenční doméně se provede inverzní Fourierova transformace (IDFT) k převedení obrazu zpět do prostorové domény.
+
+**Filtr dolní propust (Low-pass filter):**
+- Umožňuje průchod nízkým frekvencím a potlačuje vysoké frekvence. Často se používá pro redukci šumu nebo vyhlazování obrazu.  
+
+**Filtr horní propust (High-pass filter):**
+- Přenáší vysoké frekvence a potlačuje nízké frekvence. Může být využíván pro detekci hran nebo odstranění nízkofrekvenčního šumu.
 
 # 42. Komprese obrazů (Redundance a irelevance)
+Komprese obrazů je proces snižování množství dat potřebných k reprezentaci obrazu s minimálním úbytkem kvality. 
+
+**Redundance:** Prázdný prostor: Mnoho obrazů obsahuje oblasti s jednolitou barvou nebo malým množstvím detailů. Kompresní algoritmy mohou využít redundanci v těchto oblastech tím, že ukládají pouze informace o změnách v barvě nebo intenzitě.
+
+**Irelevance:** Nepodstatné informace: Některé informace v obraze mohou být odstraněny, aniž by došlo k výrazné ztrátě kvality. Například, vysokofrekvenční složky mohou být potlačeny, pokud lidské oko nemůže rozlišit jemné detaily.
 
 # 43. Odhad entropie
+Odhad entropie je proces určování míry nejistoty nebo překvapení v daném datovém souboru. Entropie je koncept z teorie informací, a zjištění entropie dat může poskytnout informace o jejich složitosti nebo náhodnosti. Existuje několik metod pro odhad entropie, přičemž jednou z nich je odhad pomocí histogramu.
+
+Zde je postup pro odhad entropie pomocí histogramu:
+
+1. **Vytvoření histogramu:**
+   - Nejprve vytvořte histogram datového souboru. Histogram je graf, který ukazuje distribuci frekvencí hodnot v daném rozsahu.
+
+2. **Normalizace histogramu:**
+   - Normalizujte hodnoty histogramu tak, aby součet všech hodnot byl roven jedné. To vytvoří pravděpodobnostní rozložení dat.
+
+3. **Výpočet entropie:**
+   - Entropie `H` se může vypočítat pomocí vzorce:
+    
+
+4. **Odhad entropie:**
+   - Získaná hodnota `H` představuje odhad entropie dat. Vyšší hodnota entropie indikuje větší nejistotu nebo náhodnost v datech.
+
+5. **Volba vhodné velikosti intervalů:**
+   - Velikost intervalů v histogramu může ovlivnit přesnost odhadu entropie. Volba optimální velikosti intervalů může být klíčová pro dosažení správných výsledků.
+
+Tento postup poskytuje odhad entropie na základě distribuce hodnot v datech. Je důležité si být vědom toho, že odhad entropie může být ovlivněn velikostí vzorku a volbou rozlišení histogramu. V praxi je často používán na analýzu složitosti dat, měření náhodnosti nebo při optimalizaci kódování v oblasti teorie informací.
 
 # 44. RLE - kódování délkou běhu
+RLE (Run-Length Encoding), neboli kódování délkou běhu, je jednoduchá metoda komprese dat, která je efektivní pro reprezentaci sekvencí opakujících se hodnot. Princip RLE spočívá v nahrazení opakujících se skupin dat jednou hodnotou a délkou této skupiny. Tato technika je často používána pro kompresi obrazů, zvuku nebo textu.
+
+Zde je jednoduchý popis RLE:
+
+1. **Sekvenční skupiny:**
+   - Data jsou procházena postupně ve směru, ve kterém se čte text, obraz nebo zvuk.
+
+2. **Identifikace běhů:**
+   - Najdou se skupiny opakujících se hodnot, tzv. běhy. Běh obsahuje stejnou hodnotu nebo skupinu hodnot.
+
+3. **Kódování délkou běhu:**
+   - Každý běh je nahrazen jednou hodnotou a délkou tohoto běhu. Místo ukládání každé hodnoty zvlášť se ukládá hodnota a délka běhu. Pokud je běh délky 1, můžeme tuto informaci často zkrátit.
+
+4. **Dekódování:**
+   - Při dekódování je obnovena původní posloupnost dat na základě zakódovaných hodnot a délek běhů.
+
+Příklad RLE kódování:
+```
+Originální:  AAAABBBCCDAA
+Zakódované:  4A3B2C1D2A
+```
+Toto je ovšem velice neefektivní pokud mámé soubor kde se nám hodnoty neustále mění proto exituje  
+
+**RLE - pomocí excape sekvencí** - kódují se pouze opakující se sekvence delší než 3
+
+```
+Originální:  AAAABBCDDDDABD
+Zakódované:  #4ABBC#4DABD
+```
 
 # 45. Huffmanovo kódování
+Metoda je založená na stanovení četnosti výskytů jednotlivých znaků v kódovaném souboru a kódování znaků s největší četností slovem s nejkratší délkou.
+
+![huffman kodovaní](../imgs/huffman.PNG)
 
 # 46. Diskrétní kosinová transformace
+
+
+Odpověď: Diskrétní kosinová transformace (DCT) je matematická transformace používaná zejména v oblasti komprese dat, zejména v oblasti komprese obrazových a zvukových dat. Její cílem je reprezentovat signál (v tomto případě blok obrazu nebo zvukový blok) pomocí frekvenčních složek, což umožňuje efektivní kompresi.
+
+
+1. **Rozdělení obrazu na bloky:**
+   - Obraz je rozdělen na menší bloky. Každý blok je zpracováván samostatně.
+
+2. **Převod do frekvenčního prostoru:**
+   - Pro každý blok je použita DCT k převodu bloku z prostoru pixelů do frekvenčního prostoru.
+   - DCT převádí informace o intenzitách pixelů na frekvenční koeficienty, kde vyšší frekvence odpovídají detailům a nižší frekvence odpovídají obecným vzorům v obraze.
+
+3. **Kvantizace:**
+   - Kvantizace je proces, při kterém se frekvenční koeficienty zaokrouhlují nebo se jim přiřazují menší hodnoty, aby se dosáhlo komprese dat. Tento krok ztrácí některé detaily, ale umožňuje efektivní redukci dat.
+
+4. **Kodování:**
+   - Nakonec se provede kódování kvantizovaných frekvenčních koeficientů. Může se použít různé metody kódování, jako je Huffmanovo kódování nebo aritmetické kódování.
+
+
 
 # 47. BOC vs ROC
 
 # 48. Kódování hranic oblastí (polygonální aproximace hranice)
+Otázka: Co znamená kódování hranic oblastí pomocí polygonální aproximace hranice?
+
+Odpověď: Kódování hranic oblastí s využitím polygonální aproximace hranice je technika v oblasti zpracování obrazu, která se používá k reprezentaci tvaru hranice objektu pomocí polygonu nebo mnohoúhelníku. Tato technika je často využívána při analýze a kompresi obrazových dat.
+
+Postup kódování hranic oblastí pomocí polygonální aproximace může být následující:
+
+1. **Detekce hran:**
+   - Začneme detekcí hran v obraze, což může být provedeno pomocí různých metod, například operátorů detekce hran (Sobel, Canny atd.).
+
+2. **Křivková aproximace:**
+   - Následně se provádí křivková aproximace hranice. V této fázi se snažíme najít polygonální tvar, který co nejvěrněji reprezentuje tvar hranice.
+
+3. **Redukce bodů:**
+   - Aby byla reprezentace efektivnější, mohou být body polygonu nějakým způsobem redukovány, například pomocí algoritmů pro eliminaci zbytečných bodů, nebo pro aproximaci křivek.
+
+4. **Kódování:**
+   - Nakonec se provede kódování polygonální aproximace. Místo ukládání každého pixelu hranice se ukládají pouze vrcholy polygonu a informace o propojení těchto vrcholů. To značně snižuje paměťové požadavky pro reprezentaci hranice.
+
+Tato technika je často využívána v situacích, kdy je potřeba efektivně reprezentovat oblasti s hranicemi, například v geografických informačních systémech (GIS), analýze obrazu nebo ve vizualizaci dat. Použití polygonální aproximace může zjednodušit a komprimovat reprezentaci hranic, což je užitečné při ukládání, přenosu nebo analýze obrazových dat.
 
 # 49. Řetězový (Freemanův) kód
+Řetězový kód, známý také jako Freemanův kód nebo kód směrů, je technika kódování tvaru objektů nebo hranic v obraze pomocí směrů, ve kterých jsou hrany reprezentovány. Tato metoda slouží k efektivnímu popisu oblastí a tvarů v digitálních obrazech.
 
+Principy řetězového kódu jsou následující:
+
+1. **Zahájení výchozím bodem:**
+   - Začínáme v určitém počátečním bodě na hranici objektu.
+
+2. **Kódování směrů:**
+   - Pro každý další bod na hranici objektu je kódována směr, kterým se pohybujeme od předchozího bodu. Směry jsou obvykle reprezentovány osmi různými směry, často označovanými čísly od 0 do 7 nebo pomocí písmen (N, NE, E, SE, S, SW, W, NW).
+
+3. **Opakování:**
+   - Postup se opakuje pro každý bod na hranici objektu, až se vrátíme na výchozí bod.
+
+Celý řetězový kód tvoří sekvence směrů, které popisují tvar hranice objektu. Tato sekvence směrů může být následně použita k popisu tvaru objektu nebo k jeho porovnání s jinými tvary.
+
+Freemanův kód je jednou z nejznámějších forem řetězového kódu. Přestože existují různé varianty tohoto přístupu, základní principy zůstávají podobné. Řetězové kódy jsou často využívány v oblasti analýzy obrazu, zejména při identifikaci a klasifikaci tvarů v digitálních obrazech.
 # 50. Morfologické operace
 
 # 51. Dilatace obrazu
