@@ -1,5 +1,8 @@
 # Témata ke zkoušce
 
+## Konktrétní otázky ke zkoušce
+[Pokračovat na materialy](Materialy/otazky.md)
+
 ## 1. Optika oka
 [Pokračovat na materialy](Materialy/1.md)
 
