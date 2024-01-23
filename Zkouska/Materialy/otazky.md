@@ -503,17 +503,159 @@ Celý řetězový kód tvoří sekvence směrů, které popisují tvar hranice o
 
 Freemanův kód je jednou z nejznámějších forem řetězového kódu. Přestože existují různé varianty tohoto přístupu, základní principy zůstávají podobné. Řetězové kódy jsou často využívány v oblasti analýzy obrazu, zejména při identifikaci a klasifikaci tvarů v digitálních obrazech.
 # 50. Morfologické operace
+Morfologické operace jsou techniky zpracování obrazu, které se zaměřují na tvar a strukturu objektů v obraze. Tyto operace jsou často používány k úpravám, segmentaci nebo analýze obrazu. 
+
+1. **Eroze:**
+   - Cílem eroze je zmenšení objektu nebo odstranění tenkých okrajů.
+   - Provede se tak, že se strukturální element posouvá přes obrázek a v každé oblasti, kde se strukturální element plně nevejde, se pixel na dané pozici vynuluje.
+   - Eroze může být užitečná pro odstranění malých detailů nebo šumu.
+
+2. **Dilatace:**
+   - Dilatace slouží k rozšíření objektu nebo zvýraznění výrazných hran.
+   - Strukturální element se posouvá přes obrázek a na každé pozici, kde se strukturální element dotkne alespoň jednoho pixlu, se příslušný pixel nastaví na hodnotu 1 (nebo na hodnotu maximální jasu).
+   - Dilatace může být užitečná pro spojení blízkých objektů nebo zvýraznění struktur.
+
+Tyto dvě základní operace lze také kombinovat a používat opakovaně pro dosažení konkrétních efektů. Morfologické operace jsou běžně využívány ve zpracování obrazu, zejména při úpravě tvarů, extrakci rysů nebo odstranění šumu.
 
 # 51. Dilatace obrazu
+Dilatace obrazu je morfologická operace, která slouží k rozšíření oblastí objektů v obraze nebo zvýraznění hranic. Tato operace je často využívána ve zpracování obrazu pro úpravu tvarů a analýzu struktury. Pro dilataci se používá strukturální element (často maticový filtr), který se posouvá přes každý pixel obrazu.
+
+Princip dilatace:
+
+1. **Strukturální element:**
+   - Je to malá matice nebo jádro, které představuje tvar, který chceme aplikovat na obraz.
+   - Obvykle je definován jako čtvercová nebo obdélníková matice.
+
+2. **Posunutí strukturálního elementu:**
+   - Strukturální element se postupně posouvá přes každý pixel obrazu.
+
+3. **Rozšíření objektů:**
+   - Na každé pozici, kde se strukturální element dotkne alespoň jednoho pixlu, se příslušné pixely v obrazu nastaví na hodnotu 1 (nebo na hodnotu maximální jasu).
+   - Tím dochází k rozšíření objektů v obraze.
+
+Dilatace se často používá v kombinaci s erozí (morfolgická eroze) pro dosažení různých efektů. Společně mohou sloužit k odstranění malých detailů, spojení objektů nebo vytvoření výraznějších hranic.
+
+Použití dilatace závisí na konkrétním úkolu nebo aplikaci, ale obecně pomáhá vylepšit kvalitu obrazu a připravit ho pro další analýzu či zpracování.
 
 # 52. Eroze obrazu
+Eroze obrazu je další morfologická operace používaná ve zpracování obrazu. Na rozdíl od dilatace, eroze slouží k zmenšení objektů nebo odstranění tenkých okrajů. Stejně jako u dilatace, i zde se využívá strukturální element (matice filtru), který se pohybuje přes každý pixel obrazu.
 
+Princip eroze:
+
+1. **Strukturální element:**
+   - Je to malá matice nebo jádro, které definuje tvar, který chceme aplikovat na obraz.
+   - Bývá obvykle čtvercová nebo obdélníková matice.
+
+2. **Posunutí strukturálního elementu:**
+   - Strukturální element se postupně posouvá přes každý pixel obrazu.
+
+3. **Zmenšení objektů:**
+   - Na každé pozici, kde se strukturální element plně nevejde, se příslušné pixely v obrazu vynulují (nastaví na hodnotu 0).
+   - To vede ke zmenšení objektů v obraze a odstranění tenkých okrajů.
+
+Eroze může být užitečná pro odstranění malých detailů, oddělení objektů, nebo redukci nebo vyhlazení hran. Kombinace eroze a dilatace (morfolgická eroze a dilatace) může být použita k různým účelům, jako je odstranění šumu, vylepšení tvaru objektů nebo segmentace obrazu. Použití eroze a dilatace závisí na konkrétních potřebách a cílech zpracování obrazu.
 # 53. Binární otevření a uzavření
+Binární otevření a uzavření jsou morfologické operace používané ve zpracování obrazu pro úpravu tvarů objektů a odstranění šumu. Tyto operace kombinují erozi a dilataci, a jsou prováděny na binárních obrazech, kde každý pixel může nabývat pouze dvou hodnot (obvykle 0 nebo 1).
 
-# 54. Kostra pomocí macimálních kruhů
+1. **Binární otevření:**
+   - Binární otevření kombinuje erozi a dilataci v tomto pořadí.
+   - Nejprve se aplikuje eroze, což má za následek zmenšení objektů a odstranění tenkých okrajů.
+   - Poté následuje dilatace, což rozšiřuje zbývající objekty a spojuje blízké struktury.
+
+   Binární otevření je užitečné pro odstranění malých objektů a zlepšení celkového tvaru v obraze.
+
+2. **Binární uzavření:**
+   - Binární uzavření kombinuje dilataci a erozi v tomto pořadí.
+   - Nejprve se aplikuje dilatace, což rozšiřuje objekty a spojuje blízké struktury.
+   - Poté následuje eroze, což má za následek zmenšení objektů a odstranění malých výčnělků.
+
+   Binární uzavření je užitečné pro uzavření malých mezernatostí uvnitř objektů a vyhlazení obrysů.
+
+Obě operace, binární otevření a uzavření, jsou často používány v oblastech jako segmentace obrazu, extrakce rysů a úprava tvarů objektů. V závislosti na konkrétním úkolu lze tyto operace použít k dosažení požadovaných efektů ve zpracování binárních obrazů.
+
+# 54. Kostra pomocí maximálních kruhů
+Kostra pomocí maximálních kruhů (anglicky *Skeletonization using Maximum Inscribed Circles*) je technika ve zpracování obrazu, která slouží k extrakci kostry (skeletonu) objektu pomocí maximálních kruhů, které jsou vepsány do objektu.
+
+Principy postupu:
+
+1. **Binarizace:**
+   - Obraz je obvykle převeden na binární formu, kde objekty mají hodnotu 1 a pozadí hodnotu 0.
+
+2. **Hledání maximálních kruhů:**
+   - Pro každý pixel v objektu se hledá největší možný kruh, který je plně obsažen v objektu. To se děje průchodem obrazem a hledáním maximálních kruhů pro každý pixel.
+
+3. **Kostra:**
+   - V každém maximálním kruhu se jeden pixel považuje za součást kostry objektu.
+   - Výsledkem je subpixlová kostra, která zachycuje středy maximálních kruhů.
+
+4. **Postprocesing:**
+   - Po extrakci kostry může následovat postprocesing, jako je odstranění malých větví nebo úprava tvaru kostry podle potřeb konkrétní aplikace.
+
+Tato metoda je využívána v oblastech jako analýza tvarů objektů, rozpoznávání vzorů a extrakce klíčových rysů. Je důležité si být vědom toho, že kostra získaná pomocí maximálních kruhů může být závislá na parametrech, jako je velikost maximálního kruhu, a ty by měly být přizpůsobeny konkrétním vlastnostem objektů v obraze.
 
 # 55. Transformace tref či miň
+Transformace "Hit or Miss" („Trefa nebo zásah“) je morfologická operace, která se používá k detekci specifických vzorů nebo struktur v binárních obrazech. Tato technika kombinuje dvě morfologické operace – erozi a negativ eroze (dilatace na komplementu obrazu).
+
+Princip transformace "Hit or Miss":
+
+1. **Strukturální elementy:**
+   - Tato operace pracuje se dvěma strukturálními elementy – jedním pro objekt (pozitivní strukturální element) a druhým pro jeho okolí (negativní strukturální element).
+
+2. **Eroze a negativ eroze:**
+   - Obraz je nejprve erodován pomocí pozitivního strukturálního elementu.
+   - Poté je erodován komplement obrazu pomocí negativního strukturálního elementu.
+
+3. **Zjištění shody:**
+   - Shoda nastává pouze tehdy, když pozitivní strukturální element vyhovuje objektu a negativní strukturální element vyhovuje okolí.
+
+4. **Výsledek:**
+   - Výsledný obraz obsahuje pouze ty oblasti, kde došlo k shodě.
+
+Transformace "Hit or Miss" se často používá k detekci specifických tvarů nebo vzorů v obrazech, a to i v případech, kdy tyto vzory mohou být přítomny na pozadí jiného vzoru. Je to užitečné v oblastech jako rozpoznávání obrazu a analýza struktury. Parametry strukturálních elementů jsou klíčové pro úspěšné využití této morfologické operace v konkrétním kontextu.
 
 # 56. Vzdálenostní transformace 
+Vzdálenostní transformace (neboli transformace vzdálenosti) je technika ve zpracování obrazu, která přiřazuje každému pixelu v obraze hodnotu, která udává jeho vzdálenost k nejbližšímu bodu nebo hranici. Tato transformace se často používá pro analýzu tvaru a vzdálenostních vlastností objektů v obraze.
 
+Principy vzdálenostní transformace:
+
+1. **Výběr referenčních bodů:**
+   - Nejprve jsou vybrány body v obraze, které slouží jako referenční body nebo body, k nimž se bude počítat vzdálenost. Tyto body mohou být například hraniční body objektů.
+
+2. **Výpočet vzdálenosti:**
+   - Pro každý pixel v obraze se vypočítá vzdálenost k nejbližšímu referenčnímu bodu. Existují různé metody pro výpočet vzdálenosti, například euklidovská vzdálenost, Manhattanská vzdálenost nebo Chebyshevova vzdálenost.
+
+3. **Přiřazení hodnoty:**
+   - Výsledkem je obraz, kde každý pixel má hodnotu odpovídající jeho vzdálenosti k nejbližšímu referenčnímu bodu.
+
+Vzdálenostní transformace se často využívá pro:
+
+- **Segmentaci objektů:**
+  - Pomáhá oddělit objekty od pozadí a určit jejich vnitřní a vnější hranice.
+
+- **Analýzu tvarů:**
+  - Poskytuje informace o tvaru a velikosti objektů v obraze.
+
+- **Extrakci rysů:**
+  - Umožňuje identifikovat klíčové rysy, jako jsou centroidy nebo hranice.
+
+Vzdálenostní transformace je užitečný nástroj v oblasti zpracování obrazu a analýzy obrazových dat pro účely extrakce informací o geometrii objektů.
 # 57. Top-hat transformace
+Top-hat transformace (též známá jako "top-hat filtering" nebo "top-hat operation") je morfologická operace používaná ve zpracování obrazu. Tato transformace slouží k odhalení malých struktur nebo detailů v obraze, které jsou menší než použitý strukturální element.
+
+Princip top-hat transformace:
+
+1. **Vstupní obraz:**
+   - Pracuje se šedotónovým nebo binárním obrazem.
+
+2. **Definice strukturálního elementu:**
+   - Vybrání vhodného strukturálního elementu, který představuje tvar nebo velikost objektů, které chceme zvýraznit.
+
+3. **Otevření obrazu:**
+   - Provedení morfologického otevření obrazu pomocí zvoleného strukturálního elementu.
+   - Otevření se skládá z eroze a dilatace a má za následek vyhlazení a odstranění menších objektů než je velikost strukturálního elementu.
+
+4. **Rozdíl s původním obrazem:**
+   - Odečtení výsledného otevření od původního obrazu.
+   - Tím získáme obraz, který obsahuje pouze ty detaily, které byly menší než strukturální element.
+
+Top-hat transformace je užitečná pro detekci malých struktur nebo jemných detailů v obrazech, které by jinak mohly být ztraceny nebo nepatrné. Používá se v různých aplikacích, včetně lékařského zobrazení, analýzy materiálů, a ve všeobecnosti pro vylepšení viditelnosti jemných detailů v obrazech.
