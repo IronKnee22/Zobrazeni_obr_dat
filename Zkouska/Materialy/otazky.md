@@ -351,9 +351,32 @@ Odstranění nevýznamných hranových bodů se často provádí s cílem zachov
 - Klastrování pixelů na základě jejich vlastností, jako je intenzita nebo barva, může odstranit nevýznamné hrany. 
 
 # 40. Fourierova transformace (DFT jednoduchých obrazců)
-Fourierova transformace mění …data… z 
-časové oblasti do frekvenční oblasti a zpět.  
-Tato transformace umožňuje analýzu frekvenčních složek obrazu nebo signálu.
+
+**Fourierova transformace (DFT) jednoduchých obrazců:**
+
+Fourierova transformace je matematická technika, která umožňuje reprezentovat obraz nebo signál ve frekvenční oblasti. DFT se často používá v oblasti zpracování obrazu k analýze frekvenčních charakteristik obrazových dat. Zde je jednoduchý popis Fourierovy transformace jednoduchých obrazců:
+
+1. **Periodické obrazy:**
+   - Fourierova transformace je často aplikována na periodické obrazy, což jsou obrazy, které se opakují v obou směrech. To zahrnuje jednorozměrné i dvourozměrné obrazy.
+
+2. **Fourierova transformace v jedné dimenzi:**
+   - Pro jednorozměrný obraz nebo signál se používá jednorozměrná Fourierova transformace (1D DFT).
+   - Pro každý bod v jednorozměrném obrazu je vypočítána komplexní hodnota, která reprezentuje amplitudu a fázi příslušné frekvence v tomto bodě.
+
+3. **Fourierova transformace v dvou dimenzích:**
+   - Pro dvourozměrný obraz se používá dvourozměrná Fourierova transformace (2D DFT).
+   - Pro každý pixel v obrazu se vypočítá komplexní hodnota, která reprezentuje amplitudu a fázi příslušné frekvence v daném bodě.
+
+4. **Frekvenční spektrum:**
+   - Výsledek Fourierovy transformace se nazývá frekvenční spektrum a obsahuje informace o různých frekvencích přítomných v obrazu.
+
+5. **Inverzní Fourierova transformace:**
+   - Inverzní Fourierova transformace (IDFT) umožňuje převést frekvenční spektrum zpět na prostorový obraz.
+
+6. **Příklady použití:**
+   - Fourierova transformace se často používá při filtrování obrazu, kompresi, analýze obrazových textur a dalších aplikacích zpracování obrazu.
+
+Výsledkem Fourierovy transformace je reprezentace obrazu ve frekvenční oblasti, což může být užitečné pro analýzu a úpravu obrazových dat. Fourierova transformace hraje klíčovou roli v mnoha oblastech, jako jsou telekomunikace, zpracování signálů a zpracování obrazu.
 
 # 41. Filtrace ve frekvenční oblasti
 Filtrace ve frekvenční oblasti je technika zpracování obrazu, která pracuje s obrazem nebo signálem ve frekvenční doméně. Hlavním nástrojem pro filtrace ve frekvenční oblasti je Fourierova transformace, která umožňuje převod obrazu ze současné prostorové domény na frekvenční doménu a zpět.
@@ -463,6 +486,27 @@ Odpověď: Diskrétní kosinová transformace (DCT) je matematická transformace
 
 
 # 47. BOC vs ROC
+BOC (Block-based Compression) a ROC (Region-based Compression) jsou dva přístupy v oblasti komprese obrazových dat, které se zaměřují na snižování objemu dat při zachování co nejlepší kvality obrazu. Přestože jsou oba přístupy podobné, liší se v tom, jak přistupují k dělení a komprimování obrazových dat.
+
+1. **BOC (Block-based Compression):**
+   - **Princip:**
+     - Obraz je rozdělen na malé bloky, obvykle čtvercové nebo obdélníkové.
+     - Každý blok je nezávisle komprimován.
+     - Díky nezávislé kompresi bloků může být ztráta dat optimalizována pro každý blok zvlášť.
+   - **Výhody:**
+     - Jednoduchý a efektivní přístup pro lokální oblasti obrazu.
+     - Snadná implementace a paralelizace, což může zrychlit proces komprese.
+
+2. **ROC (Region-based Compression):**
+   - **Princip:**
+     - Obraz je rozdělen do větších regionů než bloky.
+     - Každý region je analyzován a komprimován jako celek.
+     - Při kompresi lze vzít v úvahu vzájemné vztahy mezi pixely v rámci regionu.
+   - **Výhody:**
+     - Lepší zachování struktur a vzorů v obrazu v porovnání s blokovým přístupem.
+     - Vhodný pro scény s významnými regionálními vlastnostmi.
+
+Při studiu těchto přístupů je důležité si uvědomit, že volba mezi BOC a ROC závisí na specifických požadavcích a charakteristikách konkrétních obrazových dat a aplikací. Obě metody mají své výhody a nevýhody a jsou využívány v různých kontextech.
 
 # 48. Kódování hranic oblastí (polygonální aproximace hranice)
 Otázka: Co znamená kódování hranic oblastí pomocí polygonální aproximace hranice?
@@ -554,6 +598,7 @@ Princip eroze:
    - To vede ke zmenšení objektů v obraze a odstranění tenkých okrajů.
 
 Eroze může být užitečná pro odstranění malých detailů, oddělení objektů, nebo redukci nebo vyhlazení hran. Kombinace eroze a dilatace (morfolgická eroze a dilatace) může být použita k různým účelům, jako je odstranění šumu, vylepšení tvaru objektů nebo segmentace obrazu. Použití eroze a dilatace závisí na konkrétních potřebách a cílech zpracování obrazu.
+
 # 53. Binární otevření a uzavření
 Binární otevření a uzavření jsou morfologické operace používané ve zpracování obrazu pro úpravu tvarů objektů a odstranění šumu. Tyto operace kombinují erozi a dilataci, a jsou prováděny na binárních obrazech, kde každý pixel může nabývat pouze dvou hodnot (obvykle 0 nebo 1).
 
